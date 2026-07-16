@@ -22,10 +22,12 @@ export async function createGuest(tenantId: string, formData: FormData) {
   const supabase = await createServerSupabase()
   const name = formData.get('name') as string
   const phone = formData.get('phone') as string || ''
+  const category = formData.get('category') as string || 'General'
   const { error } = await supabase.from('guests').insert({
     tenant_id: tenantId,
     name,
-    phone,
+    phone_number: phone,
+    category,
     qr_code_token: Math.random().toString(36).substring(2, 10).toUpperCase()
   })
   if (error) throw new Error(error.message)

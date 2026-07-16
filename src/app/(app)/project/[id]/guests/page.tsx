@@ -24,7 +24,7 @@ export default async function GuestsPage({ params }: { params: Promise<{ id: str
             <div key={guest.id} className="px-5 py-3 flex items-center justify-between">
               <div className="min-w-0">
                 <p className="text-sm font-medium text-navy-700">{guest.name}</p>
-                <p className="text-[10px] text-navy-400/40">{guest.qr_code_token?.substring(0, 8)} · {guest.phone || '—'}</p>
+                <p className="text-[10px] text-navy-400/40">{guest.category || 'General'} · {guest.qr_code_token?.substring(0, 8)}</p>
               </div>
               <div className="flex items-center gap-2">
                 {guest.status === 'attended' ? (
