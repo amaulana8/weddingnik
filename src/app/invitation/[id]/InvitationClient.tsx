@@ -265,7 +265,19 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
 
   return (
     <>
-      <div className={`min-h-screen bg-gradient-to-b ${theme.bg} flex flex-col items-center relative overflow-hidden`}>
+      <div className={`min-h-screen flex flex-col items-center relative overflow-hidden ${
+          themeId === 'modern' ? 'bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900' :
+          themeId === 'royal' ? 'bg-gradient-to-b from-amber-50 via-white to-amber-50' :
+          themeId === 'vintage' ? 'bg-gradient-to-b from-emerald-50 via-stone-50 to-emerald-50' :
+          themeId === 'elegant' ? 'bg-gradient-to-b from-red-50 via-white to-red-50' :
+          themeId === 'sakura' ? 'bg-gradient-to-b from-pink-100 via-white to-pink-50' :
+          themeId === 'lavender' ? 'bg-gradient-to-b from-purple-100 via-white to-purple-50' :
+          themeId === 'sunflower' ? 'bg-gradient-to-b from-amber-100 via-white to-yellow-50' :
+          themeId === 'tropical' ? 'bg-gradient-to-b from-emerald-100 via-white to-teal-50' :
+          themeId === 'midnight' ? 'bg-gradient-to-b from-indigo-950 via-indigo-900 to-indigo-950' :
+          themeId === 'lily' ? 'bg-gradient-to-b from-rose-gold-50 via-white to-rose-gold-50/30' :
+          'bg-gradient-to-b from-rose-100 via-white to-rose-50'
+        }`}>
         {/* Floating petals - theme specific */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {petalMap[themeId]?.map((p: any, i: number) => (
@@ -275,10 +287,10 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
 
         {/* Decorative bg blobs */}
         <div className={`absolute top-0 left-0 -ml-40 -mt-40 h-[600px] w-[600px] rounded-full blur-3xl opacity-50 z-0 ${
-          theme.isDark ? 'bg-indigo-800/40' : 'bg-rose-100/60'
+          themeId === 'modern' || themeId === 'midnight'  ? 'bg-indigo-800/40' : 'bg-rose-100/60'
         }`} />
         <div className={`absolute bottom-0 right-0 -mr-40 -mb-40 h-[600px] w-[600px] rounded-full blur-3xl opacity-50 z-0 ${
-          theme.isDark ? 'bg-indigo-900/40' : 'bg-amber-100/60'
+          themeId === 'modern' || themeId === 'midnight'  ? 'bg-indigo-900/40' : 'bg-amber-100/60'
         }`} />
 
         <div className="relative z-10 w-full max-w-lg mx-auto px-4 pb-32">
@@ -291,8 +303,8 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
 
           {/* Header */}
           <div className="text-center mt-16">
-            <p className={`text-[10px] uppercase tracking-[0.4em] font-black mb-6 ${theme.isDark ? 'text-white/50' : 'text-rose-400'}`}>The Wedding of</p>
-            <h1 className={`text-3xl sm:text-4xl font-bold mb-2 ${theme.isDark ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>
+            <p className={`text-[10px] uppercase tracking-[0.4em] font-black mb-6 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/50' : 'text-rose-400'}`}>The Wedding of</p>
+            <h1 className={`text-3xl sm:text-4xl font-bold mb-2 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>
               {coupleName}
             <p style={{fontSize:8,marginTop:4,opacity:0.3}}>Theme: {themeId}</p>
             </h1>
@@ -300,45 +312,45 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
 
           {/* Invitation message */}
           <div className="mt-10 text-center px-4">
-            <p className={`text-sm leading-relaxed italic ${theme.isDark ? 'text-white/60' : 'text-slate-500'}`}>
+            <p className={`text-sm leading-relaxed italic ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/60' : 'text-slate-500'}`}>
               {invitation.message || 'The love we share is a gift from above. We invite you to witness our union.'}
             </p>
           </div>
 
           {/* Event details */}
           {invitation.event_date && (
-            <div className={`mt-10 ${theme.cardBg} rounded-3xl p-6 border ${theme.isDark ? 'border-white/10' : 'border-white/50'} shadow-xl text-center`}>
+            <div className={`mt-10 ${themeId === 'modern' || themeId === 'midnight' ? 'bg-white/10 backdrop-blur-md' : 'bg-white/70 backdrop-blur-md' } rounded-3xl p-6 border ${themeId === 'modern' || themeId === 'midnight'  ? 'border-white/10' : 'border-white/50'} shadow-xl text-center`}>
               <div className="text-3xl mb-3">📅</div>
               <p className={`text-[10px] uppercase tracking-[0.3em] font-black mb-2 ${accent.split(' ')[0]}`}>Date & Time</p>
-              <p className={`text-lg font-bold ${theme.isDark ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>{formatDate(invitation.event_date)}</p>
-              <p className={`text-sm font-medium mt-1 ${theme.isDark ? 'text-white/60' : 'text-slate-500'}`}>{formatTime(invitation.event_date)}</p>
-              {invitation.location && <p className={`text-xs mt-3 ${theme.isDark ? 'text-white/50' : 'text-slate-500'}`}>{invitation.location}</p>}
-              {invitation.venue_address && <p className={`text-[10px] mt-1 ${theme.isDark ? 'text-white/40' : 'text-slate-400'}`}>{invitation.venue_address}</p>}
+              <p className={`text-lg font-bold ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>{formatDate(invitation.event_date)}</p>
+              <p className={`text-sm font-medium mt-1 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/60' : 'text-slate-500'}`}>{formatTime(invitation.event_date)}</p>
+              {invitation.location && <p className={`text-xs mt-3 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/50' : 'text-slate-500'}`}>{invitation.location}</p>}
+              {invitation.venue_address && <p className={`text-[10px] mt-1 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/40' : 'text-slate-400'}`}>{invitation.venue_address}</p>}
             </div>
           )}
 
           {/* Guest QR Code (if not attended) */}
           {guestInfo && !isAttended && (
-            <div className={`mt-8 ${theme.cardBg} rounded-3xl p-6 border ${theme.isDark ? 'border-white/10' : 'border-white/50'} shadow-xl text-center`}>
+            <div className={`mt-8 ${themeId === 'modern' || themeId === 'midnight' ? 'bg-white/10 backdrop-blur-md' : 'bg-white/70 backdrop-blur-md' } rounded-3xl p-6 border ${themeId === 'modern' || themeId === 'midnight'  ? 'border-white/10' : 'border-white/50'} shadow-xl text-center`}>
               <p className={`text-[10px] font-black uppercase tracking-[0.3em] mb-4 ${accent.split(' ')[0]}`}>Exclusive Guest Access</p>
-              <h3 className={`text-xl font-bold mb-2 ${theme.isDark ? 'text-white' : 'text-slate-900'}`}>Dear {guestName},</h3>
-              <p className={`text-xs mb-4 ${theme.isDark ? 'text-white/60' : 'text-slate-500'}`}>Please show this QR code at the reception desk</p>
+              <h3 className={`text-xl font-bold mb-2 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white' : 'text-slate-900'}`}>Dear {guestName},</h3>
+              <p className={`text-xs mb-4 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/60' : 'text-slate-500'}`}>Please show this QR code at the reception desk</p>
               <div className="inline-block p-3 bg-white rounded-2xl shadow-inner">
                 <img src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${guestInfo.qr_code_token}`} alt="QR" className="w-36 h-36 mx-auto" />
               </div>
-              <p className={`text-[10px] font-black uppercase tracking-widest mt-3 ${theme.isDark ? 'text-white/40' : 'text-slate-400'}`}>{guestInfo.qr_code_token}</p>
+              <p className={`text-[10px] font-black uppercase tracking-widest mt-3 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/40' : 'text-slate-400'}`}>{guestInfo.qr_code_token}</p>
             </div>
           )}
 
           {/* Attended success */}
           {guestInfo && isAttended && (
-            <div className={`mt-8 ${theme.cardBg} rounded-3xl p-6 border border-emerald-500/30 shadow-xl text-center`}>
+            <div className={`mt-8 ${themeId === 'modern' || themeId === 'midnight' ? 'bg-white/10 backdrop-blur-md' : 'bg-white/70 backdrop-blur-md' } rounded-3xl p-6 border border-emerald-500/30 shadow-xl text-center`}>
               <div className="h-14 w-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600 mb-1">Check-in Successful</p>
-              <h3 className={`text-xl font-bold mb-2 ${theme.isDark ? 'text-white' : 'text-slate-900'}`}>Welcome, {guestName}!</h3>
-              <p className={`text-xs ${theme.isDark ? 'text-white/60' : 'text-slate-500'}`}>You have been checked in. Enjoy the celebration!</p>
+              <h3 className={`text-xl font-bold mb-2 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white' : 'text-slate-900'}`}>Welcome, {guestName}!</h3>
+              <p className={`text-xs ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/60' : 'text-slate-500'}`}>You have been checked in. Enjoy the celebration!</p>
             </div>
           )}
 
@@ -358,8 +370,8 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
           {/* Guestbook */}
           {isAttended && invitation.tenants?.is_guestbook_enabled && (
             <div className="mt-8" id="guestbook">
-              <div className={`${theme.cardBg} rounded-3xl p-6 border ${theme.isDark ? 'border-white/10' : 'border-white/50'} shadow-xl`}>
-                <h3 className={`text-lg font-bold mb-4 text-center ${theme.isDark ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>Guestbook</h3>
+              <div className={`${themeId === 'modern' || themeId === 'midnight' ? 'bg-white/10 backdrop-blur-md' : 'bg-white/70 backdrop-blur-md' } rounded-3xl p-6 border ${themeId === 'modern' || themeId === 'midnight'  ? 'border-white/10' : 'border-white/50'} shadow-xl`}>
+                <h3 className={`text-lg font-bold mb-4 text-center ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>Guestbook</h3>
                 <GuestbookForm tenantId={tenantId} />
               </div>
             </div>
@@ -367,7 +379,7 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
 
           {/* Footer */}
           <div className="mt-16 text-center">
-            <p className={`text-[10px] uppercase tracking-[0.3em] font-black ${theme.isDark ? 'text-white/30' : 'text-slate-300'}`}>
+            <p className={`text-[10px] uppercase tracking-[0.3em] font-black ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/30' : 'text-slate-300'}`}>
               Created with love by {invitation.tenants?.name || 'Wedding Organizer'}
             </p>
           </div>
