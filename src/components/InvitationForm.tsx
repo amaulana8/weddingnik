@@ -73,18 +73,28 @@ export default function InvitationForm({ tenantId, invitation }: { tenantId: str
 
       <div>
         <label className="block text-[11px] font-medium text-navy-400/60 mb-1.5">Theme</label>
-        <select name="theme" defaultValue={invitation?.theme || "romantic"} className="w-full h-10 px-3 rounded-xl border border-navy-200/20 text-sm text-navy-700 font-medium bg-white focus:outline-none focus:ring-2 focus:ring-rose-gold-400/40 transition-all">
-          <option value="romantic">Romantic</option>
-          <option value="elegant">Elegant Rose</option>
-          <option value="modern">Modern Dark</option>
-          <option value="royal">Royal Gold</option>
-          <option value="vintage">Vintage</option>
-          <option value="sakura">Sakura</option>
-          <option value="tropical">Tropical</option>
-          <option value="lavender">Lavender</option>
-          <option value="sunflower">Sunflower</option>
-          <option value="lily">Lily</option>
-        </select>
+        <div className="grid grid-cols-5 gap-2">
+          {[
+            { id: 'romantic', name: 'Romantic', bg: 'bg-rose-100 border border-rose-200' },
+            { id: 'modern', name: 'Dark', bg: 'bg-slate-800 border border-slate-700' },
+            { id: 'royal', name: 'Royal', bg: 'bg-rose-gold-100/50 border border-rose-gold-200' },
+            { id: 'vintage', name: 'Vintage', bg: 'bg-emerald-50 border border-emerald-200' },
+            { id: 'sakura', name: 'Sakura', bg: 'bg-pink-50 border border-pink-200', icon: '🌸' },
+            { id: 'tropical', name: 'Tropical', bg: 'bg-emerald-50 border border-emerald-200', icon: '🌺' },
+            { id: 'elegant', name: 'Elegant', bg: 'bg-red-50 border border-red-200', icon: '🌹' },
+            { id: 'lavender', name: 'Lavender', bg: 'bg-purple-50 border border-purple-200', icon: '🪻' },
+            { id: 'sunflower', name: 'Sunflower', bg: 'bg-rose-gold-300 border border-rose-gold-400', icon: '🌻' },
+            { id: 'lily', name: 'Lily', bg: 'bg-rose-gold-50/30 border border-rose-gold-100/50', icon: '🫶' },
+          ].map(t => (
+            <label key={t.id} className="flex flex-col items-center p-1.5 border-2 rounded-xl cursor-pointer transition-all has-[:checked]:border-rose-gold-400 has-[:checked]:bg-rose-gold-50 border-rose-gold-100/30 hover:border-rose-gold-200 bg-white shadow-sm">
+              <input type="radio" name="theme" value={t.id} defaultChecked={invitation?.theme === t.id || (!invitation?.theme && t.id === 'romantic')} className="absolute opacity-0" />
+              <div className={`h-6 w-full rounded-lg mb-0.5 flex items-center justify-center ${t.bg}`}>
+                {t.icon && <span className="text-[10px]">{t.icon}</span>}
+              </div>
+              <span className="text-[7px] font-bold uppercase tracking-wide text-navy-600 truncate w-full text-center">{t.name}</span>
+            </label>
+          ))}
+        </div>
       </div>
 
       <div>
