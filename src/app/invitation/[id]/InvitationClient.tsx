@@ -103,6 +103,142 @@ const themeConfig: Record<string, { bg: string; font: string; accent: string; he
   },
 }
 
+
+const petalMap: Record<string, Array<{icon: string; left: string; duration: string; delay: string}>> = {
+  romantic: [
+    {icon: '💖', left: '10%', duration: '8s', delay: '0s'},
+    {icon: '✨', left: '30%', duration: '12s', delay: '2s'},
+    {icon: '💖', left: '50%', duration: '10s', delay: '1s'},
+    {icon: '✨', left: '75%', duration: '14s', delay: '4s'},
+    {icon: '💖', left: '90%', duration: '9s', delay: '0s'},
+  ],
+  modern: [
+    {icon: '✧', left: '15%', duration: '10s', delay: '0s'},
+    {icon: '✦', left: '35%', duration: '13s', delay: '2s'},
+    {icon: '✧', left: '55%', duration: '9s', delay: '1s'},
+    {icon: '✦', left: '75%', duration: '14s', delay: '3s'},
+    {icon: '✧', left: '90%', duration: '11s', delay: '0s'},
+  ],
+  royal: [
+    {icon: '☦', left: '10%', duration: '9s', delay: '0s'},
+    {icon: '✨', left: '30%', duration: '12s', delay: '3s'},
+    {icon: '☦', left: '50%', duration: '10s', delay: '1s'},
+    {icon: '✨', left: '70%', duration: '14s', delay: '4s'},
+    {icon: '☦', left: '85%', duration: '11s', delay: '0s'},
+  ],
+  vintage: [
+    {icon: '🍂', left: '15%', duration: '8s', delay: '0s'},
+    {icon: '🍃', left: '40%', duration: '11s', delay: '2s'},
+    {icon: '🍂', left: '60%', duration: '9s', delay: '1s'},
+    {icon: '🍃', left: '85%', duration: '13s', delay: '3s'},
+  ],
+  luxe: [
+    {icon: '✨', left: '10%', duration: '10s', delay: '0s'},
+    {icon: '💎', left: '30%', duration: '13s', delay: '2s'},
+    {icon: '✨', left: '50%', duration: '9s', delay: '1s'},
+    {icon: '✨', left: '75%', duration: '14s', delay: '4s'},
+    {icon: '💎', left: '90%', duration: '11s', delay: '0s'},
+  ],
+  boho: [
+    {icon: '🌾', left: '10%', duration: '8s', delay: '0s'},
+    {icon: '🍂', left: '35%', duration: '12s', delay: '2s'},
+    {icon: '🌾', left: '55%', duration: '9s', delay: '1s'},
+    {icon: '🍂', left: '75%', duration: '13s', delay: '3s'},
+    {icon: '🌾', left: '90%', duration: '10s', delay: '0s'},
+  ],
+  midnight: [
+    {icon: '🌙', left: '10%', duration: '10s', delay: '0s'},
+    {icon: '✨', left: '30%', duration: '13s', delay: '2s'},
+    {icon: '⭐', left: '50%', duration: '9s', delay: '1s'},
+    {icon: '✨', left: '70%', duration: '14s', delay: '3s'},
+    {icon: '🌙', left: '85%', duration: '11s', delay: '0s'},
+  ],
+  tropical: [
+    {icon: '🍃', left: '10%', duration: '8s', delay: '0s'},
+    {icon: '🌺', left: '30%', duration: '11s', delay: '2s'},
+    {icon: '🍃', left: '50%', duration: '9s', delay: '1s'},
+    {icon: '🌺', left: '75%', duration: '13s', delay: '3s'},
+    {icon: '🍃', left: '90%', duration: '10s', delay: '0s'},
+  ],
+  elegant: [
+    {icon: '🌹', left: '10%', duration: '9s', delay: '0s'},
+    {icon: '✨', left: '35%', duration: '12s', delay: '2s'},
+    {icon: '🌹', left: '55%', duration: '10s', delay: '1s'},
+    {icon: '✨', left: '75%', duration: '14s', delay: '3s'},
+    {icon: '🌹', left: '90%', duration: '11s', delay: '0s'},
+  ],
+  sakura: [
+    {icon: '🌸', left: '10%', duration: '8s', delay: '0s'},
+    {icon: '🌸', left: '30%', duration: '12s', delay: '2s'},
+    {icon: '🌸', left: '50%', duration: '10s', delay: '1s'},
+    {icon: '🌸', left: '75%', duration: '14s', delay: '4s'},
+    {icon: '🌸', left: '90%', duration: '9s', delay: '0s'},
+  ],
+  lavender: [
+    {icon: '🪻', left: '10%', duration: '9s', delay: '0s'},
+    {icon: '✨', left: '30%', duration: '12s', delay: '2s'},
+    {icon: '🪻', left: '50%', duration: '10s', delay: '1s'},
+    {icon: '✨', left: '70%', duration: '14s', delay: '3s'},
+    {icon: '🪻', left: '85%', duration: '11s', delay: '0s'},
+  ],
+  sunflower: [
+    {icon: '🌻', left: '10%', duration: '8s', delay: '0s'},
+    {icon: '✨', left: '30%', duration: '12s', delay: '2s'},
+    {icon: '🌻', left: '50%', duration: '10s', delay: '1s'},
+    {icon: '✨', left: '70%', duration: '14s', delay: '3s'},
+    {icon: '🌻', left: '85%', duration: '9s', delay: '0s'},
+  ],
+  lily: [
+    {icon: '🫶', left: '15%', duration: '9s', delay: '0s'},
+    {icon: '✨', left: '35%', duration: '12s', delay: '2s'},
+    {icon: '🫶', left: '50%', duration: '10s', delay: '1s'},
+    {icon: '✨', left: '75%', duration: '14s', delay: '3s'},
+    {icon: '🫶', left: '85%', duration: '11s', delay: '0s'},
+  ],
+  floral: [
+    {icon: '✿', left: '10%', duration: '8s', delay: '0s'},
+    {icon: '🌸', left: '30%', duration: '11s', delay: '2s'},
+    {icon: '✿', left: '55%', duration: '9s', delay: '1s'},
+    {icon: '🌸', left: '75%', duration: '13s', delay: '3s'},
+    {icon: '✿', left: '90%', duration: '10s', delay: '0s'},
+  ],
+  wildflower: [
+    {icon: '💐', left: '10%', duration: '9s', delay: '0s'},
+    {icon: '🌸', left: '35%', duration: '12s', delay: '2s'},
+    {icon: '💐', left: '55%', duration: '10s', delay: '1s'},
+    {icon: '🌸', left: '75%', duration: '13s', delay: '3s'},
+    {icon: '💐', left: '90%', duration: '11s', delay: '0s'},
+  ],
+  orchid: [
+    {icon: '💮', left: '10%', duration: '8s', delay: '0s'},
+    {icon: '🌸', left: '30%', duration: '11s', delay: '2s'},
+    {icon: '💮', left: '50%', duration: '9s', delay: '1s'},
+    {icon: '🌸', left: '75%', duration: '14s', delay: '3s'},
+    {icon: '💮', left: '90%', duration: '10s', delay: '0s'},
+  ],
+  autumn: [
+    {icon: '🍂', left: '10%', duration: '8s', delay: '0s'},
+    {icon: '🍁', left: '30%', duration: '12s', delay: '2s'},
+    {icon: '🍂', left: '50%', duration: '9s', delay: '1s'},
+    {icon: '🍁', left: '75%', duration: '14s', delay: '3s'},
+    {icon: '🍂', left: '90%', duration: '10s', delay: '0s'},
+  ],
+  hydrangea: [
+    {icon: '💠', left: '10%', duration: '9s', delay: '0s'},
+    {icon: '🌸', left: '35%', duration: '12s', delay: '2s'},
+    {icon: '💠', left: '55%', duration: '10s', delay: '1s'},
+    {icon: '🌸', left: '75%', duration: '14s', delay: '3s'},
+    {icon: '💠', left: '90%', duration: '11s', delay: '0s'},
+  ],
+  peony: [
+    {icon: '❦', left: '10%', duration: '8s', delay: '0s'},
+    {icon: '✨', left: '30%', duration: '12s', delay: '2s'},
+    {icon: '❦', left: '50%', duration: '10s', delay: '1s'},
+    {icon: '✨', left: '75%', duration: '14s', delay: '4s'},
+    {icon: '❦', left: '90%', duration: '9s', delay: '0s'},
+  ],
+}
+
 export default function InvitationClient({ invitation, guestInfo, tenantId }: Props) {
   const themeId = invitation?.theme || 'romantic'
   const theme = themeConfig[themeId] || themeConfig.romantic
@@ -130,10 +266,10 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
   return (
     <>
       <div className={`min-h-screen bg-gradient-to-b ${theme.bg} flex flex-col items-center relative overflow-hidden`}>
-        {/* Floating petals */}
+        {/* Floating petals - theme specific */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {['🌸','💮','🏵️'].map((p, i) => (
-            <span key={i} className="petal text-2xl" style={{ left: `${10 + i * 25}%`, animationDuration: `${8 + i * 2}s`, animationDelay: `${i * 3}s` }}>{p}</span>
+          {petalMap[themeId]?.map((p: any, i: number) => (
+            <span key={i} className="petal text-2xl" style={{ left: p.left, animationDuration: p.duration, animationDelay: p.delay }}>{p.icon}</span>
           ))}
         </div>
 
