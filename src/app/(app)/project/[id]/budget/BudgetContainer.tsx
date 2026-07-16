@@ -117,7 +117,7 @@ export default function BudgetContainer({ id, globalBudgetLimit, categories, exp
             <div className="bg-white rounded-xl border border-navy-100/20 p-4">
               <p className="text-[10px] font-medium text-navy-400/40 uppercase">Budget</p>
               <div className="flex items-center gap-1 mt-1">
-                <p className="text-xl font-semibold text-navy-800">Rp {globalBudgetLimit.toLocaleString('id-ID')}</p>
+                <p className="text-lg sm:text-xl font-semibold text-navy-800">Rp {globalBudgetLimit.toLocaleString('id-ID')}</p>
                 <button onClick={() => setEditingBudget(!editingBudget)} className="text-navy-400/40 hover:text-rose-gold-500"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12.22 2h3.22a2 2 0 012 2v3.22a2 2 0 01-.59 1.41l-8.59 8.59a2 2 0 01-1.41.59H3.62a1 1 0 01-1-1v-3.22a2 2 0 01.59-1.41l8.59-8.59a2 2 0 011.41-.59z"/></svg></button>
               </div>
               {editingBudget && (
@@ -129,11 +129,11 @@ export default function BudgetContainer({ id, globalBudgetLimit, categories, exp
             </div>
             <div className="bg-white rounded-xl border border-navy-100/20 p-4">
               <p className="text-[10px] font-medium text-navy-400/40 uppercase">Spent</p>
-              <p className="text-xl font-semibold text-rose-gold-500 mt-1">Rp {totalSpent.toLocaleString('id-ID')}</p>
+              <p className="text-lg sm:text-xl font-semibold text-rose-gold-500 mt-1">Rp {totalSpent.toLocaleString('id-ID')}</p>
             </div>
             <div className="bg-white rounded-xl border border-navy-100/20 p-4">
               <p className="text-[10px] font-medium text-navy-400/40 uppercase">Remaining</p>
-              <p className={`text-xl font-semibold mt-1 ${remaining >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>Rp {remaining.toLocaleString('id-ID')}</p>
+              <p className={`text-lg sm:text-xl font-semibold mt-1 ${remaining >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>Rp {remaining.toLocaleString('id-ID')}</p>
             </div>
           </div>
 
