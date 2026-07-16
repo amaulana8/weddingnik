@@ -1,4 +1,5 @@
 import { createServerSupabase } from '@/lib/supabaseServer'
+import InviteMemberForm from './InviteMemberForm'
 
 export default async function TeamPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -7,7 +8,7 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
 
   return (
     <div className="animate-fade-in space-y-6">
-      <div><h1 className="text-lg font-semibold text-navy-800 tracking-tight">Team</h1><p className="text-xs text-navy-400/60 mt-0.5">Project members</p></div>
+      <div className="flex items-center justify-between"><div><h1 className="text-lg font-semibold text-navy-800 tracking-tight">Team</h1><p className="text-xs text-navy-400/60 mt-0.5">Project members</p></div><InviteMemberForm tenantId={id} /></div>
       {members && members.length > 0 ? (
         <div className="space-y-2">
           {members.map((m) => (

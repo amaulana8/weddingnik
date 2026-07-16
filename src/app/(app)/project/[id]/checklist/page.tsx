@@ -1,4 +1,5 @@
 import { createServerSupabase } from '@/lib/supabaseServer'
+import AddTimelineForm from '../timeline/AddTimelineForm'
 
 export default async function ChecklistPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -9,7 +10,7 @@ export default async function ChecklistPage({ params }: { params: Promise<{ id: 
 
   return (
     <div className="animate-fade-in space-y-6">
-      <div><h1 className="text-lg font-semibold text-navy-800 tracking-tight">Checklist</h1><p className="text-xs text-navy-400/60 mt-0.5">{done}/{total} completed</p></div>
+      <div className="flex items-center justify-between"><div><h1 className="text-lg font-semibold text-navy-800 tracking-tight">Checklist</h1><p className="text-xs text-navy-400/60 mt-0.5">{done}/{total} completed</p></div><AddTimelineForm tenantId={id} /></div>
       {total > 0 && (
         <div className="bg-white rounded-xl border border-navy-100/20 p-5">
           <div className="flex justify-between text-xs text-navy-400/60 mb-2"><span>Progress</span><span>{Math.round(done/total*100)}%</span></div>

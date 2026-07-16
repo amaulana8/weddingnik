@@ -1,4 +1,5 @@
 import { createServerSupabase } from '@/lib/supabaseServer'
+import AddTimelineForm from './AddTimelineForm'
 
 export default async function TimelinePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -7,7 +8,7 @@ export default async function TimelinePage({ params }: { params: Promise<{ id: s
 
   return (
     <div className="animate-fade-in space-y-6">
-      <div><h1 className="text-lg font-semibold text-navy-800 tracking-tight">Timeline</h1><p className="text-xs text-navy-400/60 mt-0.5">Payment milestones</p></div>
+      <div className="flex items-center justify-between"><div><h1 className="text-lg font-semibold text-navy-800 tracking-tight">Timeline</h1><p className="text-xs text-navy-400/60 mt-0.5">Payment milestones</p></div><AddTimelineForm tenantId={id} /></div>
       {items && items.length > 0 ? (
         <div className="space-y-3">
           {items.map((item) => (

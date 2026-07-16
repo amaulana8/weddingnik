@@ -1,4 +1,6 @@
 import { createServerSupabase } from '@/lib/supabaseServer'
+import GuestbookUploadForm from '@/components/GuestbookUploadForm'
+import Link from 'next/link'
 
 export default async function GuestbookPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

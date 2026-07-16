@@ -1,4 +1,5 @@
 import { createServerSupabase } from '@/lib/supabaseServer'
+import AddVendorForm from './AddVendorForm'
 
 export default async function VendorsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -7,7 +8,7 @@ export default async function VendorsPage({ params }: { params: Promise<{ id: st
 
   return (
     <div className="animate-fade-in space-y-6">
-      <div><h1 className="text-lg font-semibold text-navy-800 tracking-tight">Vendors</h1><p className="text-xs text-navy-400/60 mt-0.5">Wedding service providers</p></div>
+      <div className="flex items-center justify-between"><div><h1 className="text-lg font-semibold text-navy-800 tracking-tight">Vendors</h1><p className="text-xs text-navy-400/60 mt-0.5">Wedding service providers</p></div><AddVendorForm tenantId={id} /></div>
       {vendors && vendors.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {vendors.map((v) => (
