@@ -108,19 +108,25 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
             </div>
           )}
 
-          {/* RSVP + Gift Tabs */}
+          {/* RSVP + Gift */}
           {(invitation.rsvp_enabled || (invitation.gift_enabled && invitation.gift_bank_name)) && (
             <div className="mt-8">
-              {hasBoth && (
+              {hasBoth ? (
                 <div className="flex rounded-2xl bg-white/30 border border-white/50 p-1 mb-4">
                   <button onClick={() => setActiveTab('rsvp')}
                     className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'rsvp' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>RSVP</button>
                   <button onClick={() => setActiveTab('gift')}
                     className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'gift' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>Gift</button>
                 </div>
+              ) : (
+                <div className="flex rounded-2xl bg-white/30 border border-white/50 p-1 mb-4">
+                  <button className="flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-sm text-xs font-bold uppercase tracking-widest">
+                    {invitation.rsvp_enabled ? 'RSVP' : 'Gift'}
+                  </button>
+                </div>
               )}
-              {activeTab === 'rsvp' && invitation.rsvp_enabled && <RSVPForm tenantId={tenantId} />}
-              {activeTab === 'gift' && invitation.gift_enabled && (
+              {invitation.rsvp_enabled && (hasBoth ? activeTab === 'rsvp' : true) && <RSVPForm tenantId={tenantId} />}
+              {(invitation.gift_enabled && invitation.gift_bank_name) && (hasBoth ? activeTab === 'gift' : true) && (
                 <GiftSection bankName={invitation.gift_bank_name} accountNumber={invitation.gift_account_number} accountName={invitation.gift_account_name || ''} />
               )}
             </div>
