@@ -1,5 +1,6 @@
 import { createServerSupabase } from '@/lib/supabaseServer'
 import Link from 'next/link'
+import NewProjectButton from '@/components/NewProjectButton'
 
 export default async function ProjectListPage() {
   const supabase = await createServerSupabase()
@@ -18,6 +19,7 @@ export default async function ProjectListPage() {
           <h1 className="text-lg font-semibold text-navy-800 tracking-tight">Projects</h1>
           <p className="text-xs text-navy-400/60 mt-0.5">{projects?.length || 0} total projects</p>
         </div>
+        <NewProjectButton />
       </div>
 
       <div className="space-y-2">
