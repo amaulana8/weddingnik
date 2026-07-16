@@ -82,6 +82,14 @@ export async function updateTimelineStatus(timelineId: string, tenantId: string,
   revalidatePath(`/project/${tenantId}/checklist`)
 }
 
+export async function deleteTimeline(tenantId: string, timelineId: string) {
+  const supabase = await createServerSupabase()
+  const { error } = await supabase.from('payment_timelines').delete().eq('id', timelineId)
+  if (error) throw new Error(error.message)
+  revalidatePath(`/project/${tenantId}/timeline`)
+  revalidatePath(`/project/${tenantId}/checklist`)
+}
+
 export async function createVendor(tenantId: string, formData: FormData) {
   const supabase = await createServerSupabase()
   const name = formData.get('name') as string
