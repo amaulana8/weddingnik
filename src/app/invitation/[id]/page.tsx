@@ -1,7 +1,9 @@
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { supabaseAdmin } from '@/lib/supabaseAdmin'
 import { notFound } from 'next/navigation'
 import InvitationClient from './InvitationClient'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export default async function InvitationPublicPage({ params, searchParams }: {
   params: Promise<{ id: string }>
@@ -9,14 +11,8 @@ export default async function InvitationPublicPage({ params, searchParams }: {
 }) {
   const { id } = await params
   const { to } = await searchParams
-  const cookieStore = await cookies()
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    { cookies: { getAll() { return cookieStore.getAll() } } }
-  )
 
-  const { data: invitation } = await supabase
+  const { data: invitation } = await supabaseAdmin
     .from('invitation_details')
     .select('*, tenants(name, is_guestbook_enabled)')
     .eq('tenant_id', id)
@@ -26,7 +22,7 @@ export default async function InvitationPublicPage({ params, searchParams }: {
 
   let guestInfo = null
   if (to) {
-    const { data: guest } = await supabase
+    const { data: guest } = await supabaseAdmin
       .from('guests')
       .select('*')
       .eq('qr_code_token', to)
