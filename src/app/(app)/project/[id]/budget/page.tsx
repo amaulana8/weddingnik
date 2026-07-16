@@ -1,7 +1,8 @@
 import { createServerSupabase } from '@/lib/supabaseServer'
-import Link from 'next/link'
+import { createClient } from '@/lib/supabaseClient'
+import BudgetForm from '@/components/BudgetForm'
 
-export default async function BudgetPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function BudgetPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<any> }) {
   const { id } = await params
   const supabase = await createServerSupabase()
   const { data: project } = await supabase.from('tenants').select('total_budget').eq('id', id).single()
@@ -14,9 +15,12 @@ export default async function BudgetPage({ params }: { params: Promise<{ id: str
 
   return (
     <div className="animate-fade-in space-y-6">
-      <div>
-        <h1 className="text-lg font-semibold text-navy-800 tracking-tight">Budget</h1>
-        <p className="text-xs text-navy-400/60 mt-0.5">Track your wedding expenses</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-lg font-semibold text-navy-800 tracking-tight">Budget</h1>
+          <p className="text-xs text-navy-400/60 mt-0.5">Track your wedding expenses</p>
+        </div>
+        <BudgetForm tenantId={id} categories={categories || []} />
       </div>
 
       {/* Summary */}
