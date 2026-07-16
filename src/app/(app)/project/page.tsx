@@ -6,11 +6,14 @@ export default async function ProjectListPage() {
   const supabase = await createServerSupabase()
   const { data: { user } } = await supabase.auth.getUser()
 
-  const { data: projects } = await supabase
-    .from('tenants')
-    .select('*')
-    .eq('admin_id', user?.id)
-    .order('created_at', { ascending: false })
+  // Get projects via memberships (supports team access)
+  const { data: memberships } = await supabase
+    .from('wedding_memberships')
+    .select('tenant_id, tenants(id, name, created_at, total_budget)')
+    .eq('user_id', user?.id)
+
+  const projects = memberships?.map((m: any) => m.tenants).filter(Boolean) || []
+  projects.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 
   return (
     <div className="animate-fade-in">

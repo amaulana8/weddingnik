@@ -19,22 +19,30 @@ export default function NewProjectButton() {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return
 
-    const { data, error } = await supabase
+    // Create project
+    const { data: tenant, error: tenantError } = await supabase
       .from('tenants')
-      .insert({ name: name.trim(), admin_id: user.id })
+      .insert({ name: name.trim(), owner_id: user.id })
       .select()
       .single()
 
     setLoading(false)
 
-    if (error) {
-      alert('Gagal membuat project: ' + error.message)
+    if (tenantError) {
+      alert('Gagal membuat project: ' + tenantError.message)
       return
     }
 
+    // Add creator as admin member
+    await supabase.from('wedding_memberships').insert({
+      tenant_id: tenant.id,
+      user_id: user.id,
+      role: 'admin'
+    })
+
     setOpen(false)
     setName('')
-    router.push(`/project/${data.id}`)
+    router.push(`/project/${tenant.id}`)
   }
 
   return (

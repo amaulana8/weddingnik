@@ -5,9 +5,9 @@ export default async function DashboardPage() {
 
   const { data: { user } } = await supabase.auth.getUser()
   const { count: projectCount } = await supabase
-    .from('tenants')
+    .from('wedding_memberships')
     .select('*', { count: 'exact', head: true })
-    .eq('admin_id', user?.id)
+    .eq('user_id', user?.id)
 
   return (
     <div className="animate-fade-in">
