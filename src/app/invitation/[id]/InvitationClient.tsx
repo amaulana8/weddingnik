@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import RSVPForm from '@/components/RSVPForm'
 import GiftSection from '@/components/GiftSection'
+import InvitationFeaturesTab from './InvitationFeaturesTab'
 import { createClient } from '@/lib/supabaseClient'
 
 interface Props {
@@ -12,8 +13,7 @@ interface Props {
 }
 
 export default function InvitationClient({ invitation, guestInfo, tenantId }: Props) {
-  const [activeTab, setActiveTab] = useState<'rsvp' | 'gift'>('rsvp')
-  const hasBoth = invitation.rsvp_enabled && (invitation.gift_enabled && !!invitation.gift_bank_name && !!invitation.gift_account_number)
+  
 
   const formatDate = (d: string) => {
     if (!d) return ''
@@ -109,28 +109,17 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
           )}
 
           {/* RSVP + Gift */}
-          {(invitation.rsvp_enabled || (invitation.gift_enabled && invitation.gift_bank_name)) && (
-            <div className="mt-8">
-              {hasBoth ? (
-                <div className="flex rounded-2xl bg-white/30 border border-white/50 p-1 mb-4">
-                  <button onClick={() => setActiveTab('rsvp')}
-                    className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'rsvp' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>RSVP</button>
-                  <button onClick={() => setActiveTab('gift')}
-                    className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeTab === 'gift' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>Gift</button>
-                </div>
-              ) : (
-                <div className="flex rounded-2xl bg-white/30 border border-white/50 p-1 mb-4">
-                  <button className="flex-1 py-2.5 rounded-xl bg-white text-slate-900 shadow-sm text-xs font-bold uppercase tracking-widest">
-                    {invitation.rsvp_enabled ? 'RSVP' : 'Gift'}
-                  </button>
-                </div>
-              )}
-              {invitation.rsvp_enabled && (hasBoth ? activeTab === 'rsvp' : true) && <RSVPForm tenantId={tenantId} />}
-              {(invitation.gift_enabled && invitation.gift_bank_name) && (hasBoth ? activeTab === 'gift' : true) && (
-                <GiftSection bankName={invitation.gift_bank_name} accountNumber={invitation.gift_account_number} accountName={invitation.gift_account_name || ''} />
-              )}
-            </div>
-          )}
+          <div className="mt-8">
+            <InvitationFeaturesTab
+              tenantId={tenantId}
+              rsvpEnabled={!!invitation.rsvp_enabled}
+              giftEnabled={!!invitation.gift_enabled}
+              giftBankName={invitation.gift_bank_name}
+              giftAccountNumber={invitation.gift_account_number}
+              giftAccountName={invitation.gift_account_name}
+              theme={invitation.theme || 'romantic'}
+            />
+          </div>
 
           {/* Guestbook */}
           {isAttended && invitation.tenants?.is_guestbook_enabled && (
