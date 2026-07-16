@@ -13,8 +13,7 @@ export default async function InvitationPublicPage({ params, searchParams }: {
   const { to } = await searchParams
 
   const { data: invitation } = await supabaseAdmin
-    .from('invitation_details')
-    .select('*, tenants(name, is_guestbook_enabled)')
+    .from('invitation_details').select('*, tenants(name, is_guestbook_enabled)')
     .eq('tenant_id', id)
     .single()
 

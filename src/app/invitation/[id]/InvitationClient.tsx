@@ -158,6 +158,7 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
             <p className={`text-[10px] uppercase tracking-[0.4em] font-black mb-6 ${theme.isDark ? 'text-white/50' : 'text-rose-400'}`}>The Wedding of</p>
             <h1 className={`text-3xl sm:text-4xl font-bold mb-2 ${theme.isDark ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>
               {coupleName}
+            <p style={{fontSize:8,marginTop:4,opacity:0.3}}>Theme: {themeId}</p>
             </h1>
           </div>
 
