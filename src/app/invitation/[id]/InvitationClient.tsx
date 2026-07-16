@@ -3,9 +3,8 @@
 import { useState } from 'react'
 import RSVPForm from '@/components/RSVPForm'
 import GiftSection from '@/components/GiftSection'
-import InvitationFeaturesTab from './InvitationFeaturesTab'
 import BackgroundMusic from '@/components/BackgroundMusic'
-import { createClient } from '@/lib/supabaseClient'
+import InvitationFeaturesTab from './InvitationFeaturesTab'
 
 interface Props {
   invitation: any
@@ -13,41 +12,138 @@ interface Props {
   tenantId: string
 }
 
+const themeConfig: Record<string, { bg: string; font: string; accent: string; headerStyle: string; cardBg: string; isDark: boolean }> = {
+  romantic: {
+    bg: 'from-rose-100 via-white to-rose-50',
+    font: "'Playfair Display', serif",
+    accent: 'rose',
+    headerStyle: 'text-rose-700',
+    cardBg: 'bg-white/70 backdrop-blur-md',
+    isDark: false,
+  },
+  modern: {
+    bg: 'from-slate-900 via-slate-800 to-slate-900',
+    font: "'Montserrat', sans-serif",
+    accent: 'indigo',
+    headerStyle: 'text-indigo-300',
+    cardBg: 'bg-white/10 backdrop-blur-md',
+    isDark: true,
+  },
+  royal: {
+    bg: 'from-amber-50 via-white to-amber-50',
+    font: "'Crimson Text', serif",
+    accent: 'amber',
+    headerStyle: 'text-amber-700',
+    cardBg: 'bg-white/70 backdrop-blur-md',
+    isDark: false,
+  },
+  vintage: {
+    bg: 'from-emerald-50 via-stone-50 to-emerald-50',
+    font: "'Crimson Text', serif",
+    accent: 'emerald',
+    headerStyle: 'text-emerald-700',
+    cardBg: 'bg-white/60 backdrop-blur-md',
+    isDark: false,
+  },
+  elegant: {
+    bg: 'from-red-50 via-white to-red-50',
+    font: "'Playfair Display', serif",
+    accent: 'red',
+    headerStyle: 'text-red-700',
+    cardBg: 'bg-white/70 backdrop-blur-md',
+    isDark: false,
+  },
+  sakura: {
+    bg: 'from-pink-100 via-white to-pink-50',
+    font: "'Great Vibes', cursive",
+    accent: 'pink',
+    headerStyle: 'text-pink-600',
+    cardBg: 'bg-white/70 backdrop-blur-md',
+    isDark: false,
+  },
+  lavender: {
+    bg: 'from-purple-100 via-white to-purple-50',
+    font: "'Playfair Display', serif",
+    accent: 'purple',
+    headerStyle: 'text-purple-700',
+    cardBg: 'bg-white/70 backdrop-blur-md',
+    isDark: false,
+  },
+  sunflower: {
+    bg: 'from-amber-100 via-white to-yellow-50',
+    font: "'Playfair Display', serif",
+    accent: 'amber',
+    headerStyle: 'text-amber-700',
+    cardBg: 'bg-white/70 backdrop-blur-md',
+    isDark: false,
+  },
+  tropical: {
+    bg: 'from-emerald-100 via-white to-teal-50',
+    font: "'Montserrat', sans-serif",
+    accent: 'emerald',
+    headerStyle: 'text-emerald-600',
+    cardBg: 'bg-white/70 backdrop-blur-md',
+    isDark: false,
+  },
+  midnight: {
+    bg: 'from-indigo-950 via-indigo-900 to-indigo-950',
+    font: "'Crimson Text', serif",
+    accent: 'indigo',
+    headerStyle: 'text-indigo-300',
+    cardBg: 'bg-white/10 backdrop-blur-md',
+    isDark: true,
+  },
+  lily: {
+    bg: 'from-rose-gold-50 via-white to-rose-gold-50/30',
+    font: "'Playfair Display', serif",
+    accent: 'rose-gold',
+    headerStyle: 'text-rose-gold-600',
+    cardBg: 'bg-white/70 backdrop-blur-md',
+    isDark: false,
+  },
+}
+
 export default function InvitationClient({ invitation, guestInfo, tenantId }: Props) {
-  
-
-  const formatDate = (d: string) => {
-    if (!d) return ''
-    return new Date(d).toLocaleDateString('id-ID', {
-      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
-    })
-  }
-
-  const formatTime = (d: string) => {
-    if (!d) return ''
-    return new Date(d).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
-  }
-
-  const coupleName = `${invitation.bride_name || 'Bride'} & ${invitation.groom_name || 'Groom'}`
+  const themeId = invitation?.theme || 'romantic'
+  const theme = themeConfig[themeId] || themeConfig.romantic
   const guestName = guestInfo?.name || ''
   const isAttended = guestInfo?.status === 'attended'
+  const coupleName = `${invitation.bride_name || 'Bride'} & ${invitation.groom_name || 'Groom'}`
+
+  const formatDate = (d: string) => d ? new Date(d).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : ''
+  const formatTime = (d: string) => d ? new Date(d).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : ''
+
+  const accentColors: Record<string, string> = {
+    rose: 'text-rose-500 bg-rose-100 border-rose-200',
+    indigo: 'text-indigo-400 bg-indigo-900/30 border-indigo-700/50',
+    amber: 'text-amber-600 bg-amber-100 border-amber-200',
+    emerald: 'text-emerald-600 bg-emerald-100 border-emerald-200',
+    red: 'text-red-600 bg-red-100 border-red-200',
+    pink: 'text-pink-600 bg-pink-100 border-pink-200',
+    purple: 'text-purple-600 bg-purple-100 border-purple-200',
+    'rose-gold': 'text-rose-gold-600 bg-rose-gold-100 border-rose-gold-200',
+    teal: 'text-teal-600 bg-teal-100 border-teal-200',
+  }
+
+  const accent = accentColors[theme.accent] || accentColors.rose
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-rose-50/30 flex flex-col items-center relative overflow-hidden">
+      <div className={`min-h-screen bg-gradient-to-b ${theme.bg} flex flex-col items-center relative overflow-hidden`}>
         {/* Floating petals */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {['🌸','💮','🏵️'].map((p, i) => (
-            <span key={i} className="petal text-2xl" style={{
-              left: `${10 + i * 25}%`, animationDuration: `${8 + i * 2}s`,
-              animationDelay: `${i * 3}s`
-            }}>{p}</span>
+            <span key={i} className="petal text-2xl" style={{ left: `${10 + i * 25}%`, animationDuration: `${8 + i * 2}s`, animationDelay: `${i * 3}s` }}>{p}</span>
           ))}
         </div>
 
-        {/* Decorative bg */}
-        <div className="absolute top-0 left-0 -ml-40 -mt-40 h-[600px] w-[600px] rounded-full bg-rose-100/60 blur-3xl opacity-80 z-0" />
-        <div className="absolute bottom-0 right-0 -mr-40 -mb-40 h-[600px] w-[600px] rounded-full bg-amber-100/60 blur-3xl opacity-80 z-0" />
+        {/* Decorative bg blobs */}
+        <div className={`absolute top-0 left-0 -ml-40 -mt-40 h-[600px] w-[600px] rounded-full blur-3xl opacity-50 z-0 ${
+          theme.isDark ? 'bg-indigo-800/40' : 'bg-rose-100/60'
+        }`} />
+        <div className={`absolute bottom-0 right-0 -mr-40 -mb-40 h-[600px] w-[600px] rounded-full blur-3xl opacity-50 z-0 ${
+          theme.isDark ? 'bg-indigo-900/40' : 'bg-amber-100/60'
+        }`} />
 
         <div className="relative z-10 w-full max-w-lg mx-auto px-4 pb-32">
           {/* Bismillah */}
@@ -59,53 +155,53 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
 
           {/* Header */}
           <div className="text-center mt-16">
-            <p className="text-[10px] uppercase tracking-[0.4em] text-rose-400 font-black mb-6">The Wedding of</p>
-            <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <p className={`text-[10px] uppercase tracking-[0.4em] font-black mb-6 ${theme.isDark ? 'text-white/50' : 'text-rose-400'}`}>The Wedding of</p>
+            <h1 className={`text-3xl sm:text-4xl font-bold mb-2 ${theme.isDark ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>
               {coupleName}
             </h1>
           </div>
 
           {/* Invitation message */}
           <div className="mt-10 text-center px-4">
-            <p className="text-slate-500 text-sm leading-relaxed italic">
-              {invitation.message || 'The love we share is a gift from above. We invite you to witness our union as we become one in heart and soul.'}
+            <p className={`text-sm leading-relaxed italic ${theme.isDark ? 'text-white/60' : 'text-slate-500'}`}>
+              {invitation.message || 'The love we share is a gift from above. We invite you to witness our union.'}
             </p>
           </div>
 
           {/* Event details */}
           {invitation.event_date && (
-            <div className="mt-10 bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/50 shadow-xl text-center">
+            <div className={`mt-10 ${theme.cardBg} rounded-3xl p-6 border ${theme.isDark ? 'border-white/10' : 'border-white/50'} shadow-xl text-center`}>
               <div className="text-3xl mb-3">📅</div>
-              <p className="text-[10px] uppercase tracking-[0.3em] text-rose-400 font-black mb-2">Date & Time</p>
-              <p className="text-lg font-bold text-slate-900" style={{ fontFamily: "'Playfair Display', serif" }}>{formatDate(invitation.event_date)}</p>
-              <p className="text-slate-500 text-sm font-medium mt-1">{formatTime(invitation.event_date)}</p>
-              {invitation.location && <p className="text-slate-500 text-xs mt-3">{invitation.location}</p>}
-              {invitation.venue_address && <p className="text-slate-400 text-[10px] mt-1">{invitation.venue_address}</p>}
+              <p className={`text-[10px] uppercase tracking-[0.3em] font-black mb-2 ${accent.split(' ')[0]}`}>Date & Time</p>
+              <p className={`text-lg font-bold ${theme.isDark ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>{formatDate(invitation.event_date)}</p>
+              <p className={`text-sm font-medium mt-1 ${theme.isDark ? 'text-white/60' : 'text-slate-500'}`}>{formatTime(invitation.event_date)}</p>
+              {invitation.location && <p className={`text-xs mt-3 ${theme.isDark ? 'text-white/50' : 'text-slate-500'}`}>{invitation.location}</p>}
+              {invitation.venue_address && <p className={`text-[10px] mt-1 ${theme.isDark ? 'text-white/40' : 'text-slate-400'}`}>{invitation.venue_address}</p>}
             </div>
           )}
 
           {/* Guest QR Code (if not attended) */}
           {guestInfo && !isAttended && (
-            <div className="mt-8 bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/50 shadow-xl text-center">
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-rose-400 mb-4">Exclusive Guest Access</p>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">Dear {guestName},</h3>
-              <p className="text-slate-500 text-xs mb-4">Please show this QR code at the reception desk</p>
+            <div className={`mt-8 ${theme.cardBg} rounded-3xl p-6 border ${theme.isDark ? 'border-white/10' : 'border-white/50'} shadow-xl text-center`}>
+              <p className={`text-[10px] font-black uppercase tracking-[0.3em] mb-4 ${accent.split(' ')[0]}`}>Exclusive Guest Access</p>
+              <h3 className={`text-xl font-bold mb-2 ${theme.isDark ? 'text-white' : 'text-slate-900'}`}>Dear {guestName},</h3>
+              <p className={`text-xs mb-4 ${theme.isDark ? 'text-white/60' : 'text-slate-500'}`}>Please show this QR code at the reception desk</p>
               <div className="inline-block p-3 bg-white rounded-2xl shadow-inner">
                 <img src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${guestInfo.qr_code_token}`} alt="QR" className="w-36 h-36 mx-auto" />
               </div>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-3">{guestInfo.qr_code_token}</p>
+              <p className={`text-[10px] font-black uppercase tracking-widest mt-3 ${theme.isDark ? 'text-white/40' : 'text-slate-400'}`}>{guestInfo.qr_code_token}</p>
             </div>
           )}
 
           {/* Attended success */}
           {guestInfo && isAttended && (
-            <div className="mt-8 bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-emerald-500/30 shadow-xl text-center">
+            <div className={`mt-8 ${theme.cardBg} rounded-3xl p-6 border border-emerald-500/30 shadow-xl text-center`}>
               <div className="h-14 w-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600 mb-1">Check-in Successful</p>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">Welcome, {guestName}!</h3>
-              <p className="text-slate-500 text-xs">You have been checked in. Enjoy the celebration!</p>
+              <h3 className={`text-xl font-bold mb-2 ${theme.isDark ? 'text-white' : 'text-slate-900'}`}>Welcome, {guestName}!</h3>
+              <p className={`text-xs ${theme.isDark ? 'text-white/60' : 'text-slate-500'}`}>You have been checked in. Enjoy the celebration!</p>
             </div>
           )}
 
@@ -118,15 +214,15 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
               giftBankName={invitation.gift_bank_name}
               giftAccountNumber={invitation.gift_account_number}
               giftAccountName={invitation.gift_account_name}
-              theme={invitation.theme || 'romantic'}
+              theme={themeId}
             />
           </div>
 
           {/* Guestbook */}
           {isAttended && invitation.tenants?.is_guestbook_enabled && (
             <div className="mt-8" id="guestbook">
-              <div className="bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/50 shadow-xl">
-                <h3 className="text-lg font-bold text-slate-900 mb-4 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Guestbook</h3>
+              <div className={`${theme.cardBg} rounded-3xl p-6 border ${theme.isDark ? 'border-white/10' : 'border-white/50'} shadow-xl`}>
+                <h3 className={`text-lg font-bold mb-4 text-center ${theme.isDark ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>Guestbook</h3>
                 <GuestbookForm tenantId={tenantId} />
               </div>
             </div>
@@ -134,13 +230,16 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
 
           {/* Footer */}
           <div className="mt-16 text-center">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-slate-300 font-black">
+            <p className={`text-[10px] uppercase tracking-[0.3em] font-black ${theme.isDark ? 'text-white/30' : 'text-slate-300'}`}>
               Created with love by {invitation.tenants?.name || 'Wedding Organizer'}
             </p>
           </div>
         </div>
+
+        {/* Music */}
+        {invitation.music_url && <BackgroundMusic url={invitation.music_url} />}
       </div>
-      {invitation.music_url && <BackgroundMusic url={invitation.music_url} />}
+
       <style>{`
         @keyframes falling {
           0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
@@ -157,7 +256,6 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
 function GuestbookForm({ tenantId }: { tenantId: string }) {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
-  const supabaseClient = createClient()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
