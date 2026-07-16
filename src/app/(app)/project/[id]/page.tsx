@@ -1,5 +1,6 @@
 import { createServerSupabase } from '@/lib/supabaseServer'
 import Link from 'next/link'
+import ProjectNav from '@/components/ProjectNav'
 
 export default async function ProjectOverviewPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -39,6 +40,11 @@ export default async function ProjectOverviewPage({ params }: { params: Promise<
           <p className="text-xl font-semibold text-navy-800">Active</p>
           <p className="text-[10px] text-navy-400/40 mt-1 group-hover:text-rose-gold-500 transition-colors">Manage project →</p>
         </Link>
+      </div>
+
+      <div>
+        <h2 className="text-xs font-semibold text-navy-400/60 uppercase tracking-wider mb-3">All Features</h2>
+        <ProjectNav projectId={id} />
       </div>
     </div>
   )
