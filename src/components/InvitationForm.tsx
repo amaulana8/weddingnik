@@ -1,50 +1,33 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/lib/supabaseClient'
 import { useRouter } from 'next/navigation'
+import { upsertInvitation } from '@/app/actions/weddingActions'
 
 export default function InvitationForm({ tenantId, invitation }: { tenantId: string; invitation: any }) {
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const router = useRouter()
-  const supabase = createClient()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
+    setError('')
     const form = new FormData(e.currentTarget)
 
-    const payload: any = {
-      tenant_id: tenantId,
-      groom_name: form.get('groom_name'),
-      bride_name: form.get('bride_name'),
-      event_date: form.get('event_date'),
-      location: form.get('location'),
-      venue_address: form.get('venue_address'),
-      message: form.get('message'),
-      theme: form.get('theme') || 'romantic',
-      maps_url: form.get('maps_url'),
-      music_url: form.get('music_url'),
-      rsvp_enabled: form.get('rsvp_enabled') === 'true',
-      bismillah_enabled: form.get('bismillah_enabled') === 'true',
-      gift_enabled: form.get('gift_enabled') === 'true',
-      gift_bank_name: form.get('gift_bank_name'),
-      gift_account_number: form.get('gift_account_number'),
-      gift_account_name: form.get('gift_account_name'),
+    try {
+      await upsertInvitation(tenantId, form)
+      router.refresh()
+    } catch (err: any) {
+      setError(err.message)
     }
-
-    if (invitation?.id) {
-      await supabase.from('invitation_details').update(payload).eq('id', invitation.id)
-    } else {
-      await supabase.from('invitation_details').insert(payload)
-    }
-
     setLoading(false)
-    router.refresh()
   }
 
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-navy-100/20 p-6 space-y-5">
+      {error && <p className="text-xs text-red-500 bg-red-50 p-3 rounded-xl">{error}</p>}
+
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-[11px] font-medium text-navy-400/60 mb-1.5">Groom Name</label>

@@ -146,6 +146,40 @@ export async function createGuestbookEntry(tenantId: string, formData: FormData)
   revalidatePath(`/project/${tenantId}/photo-wall`)
 }
 
+export async function upsertInvitation(tenantId: string, formData: FormData) {
+  const supabase = await createServerSupabase()
+  const bride_name = formData.get('bride_name') as string
+  const groom_name = formData.get('groom_name') as string
+  let event_date = formData.get('event_date') as string
+  const location = formData.get('location') as string
+  const venue_address = formData.get('venue_address') as string
+  const message = formData.get('message') as string
+  const theme = formData.get('theme') as string || 'romantic'
+  const maps_url = formData.get('maps_url') as string
+  const music_url = formData.get('music_url') as string
+  const rsvp_enabled = formData.get('rsvp_enabled') === 'true'
+  const gift_enabled = formData.get('gift_enabled') === 'true'
+  const bismillah_enabled = formData.get('bismillah_enabled') === 'true'
+  const gift_bank_name = formData.get('gift_bank_name') as string
+  const gift_account_number = formData.get('gift_account_number') as string
+  const gift_account_name = formData.get('gift_account_name') as string
+
+  if (event_date && !event_date.includes('+') && !event_date.endsWith('Z')) {
+    event_date += '+07:00'
+  }
+
+  const { error } = await supabase.from('invitation_details').upsert({
+    tenant_id: tenantId, bride_name, groom_name, event_date, location,
+    venue_address, message, theme, maps_url, music_url,
+    rsvp_enabled, gift_enabled, bismillah_enabled,
+    gift_bank_name, gift_account_number, gift_account_name
+  })
+
+  if (error) throw new Error(error.message)
+  revalidatePath(`/project/${tenantId}/invitation`)
+  revalidatePath(`/invitation/${tenantId}`)
+}
+
 export async function uploadPhoto(tenantId: string, formData: FormData) {
   const supabase = await createServerSupabase()
   const name = formData.get('name') as string || 'Guest'
