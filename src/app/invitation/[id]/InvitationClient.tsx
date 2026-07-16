@@ -4,6 +4,7 @@ import { useState } from 'react'
 import RSVPForm from '@/components/RSVPForm'
 import GiftSection from '@/components/GiftSection'
 import InvitationFeaturesTab from './InvitationFeaturesTab'
+import BackgroundMusic from '@/components/BackgroundMusic'
 import { createClient } from '@/lib/supabaseClient'
 
 interface Props {
@@ -139,7 +140,7 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
           </div>
         </div>
       </div>
-
+      {invitation.music_url && <BackgroundMusic url={invitation.music_url} />}
       <style>{`
         @keyframes falling {
           0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }

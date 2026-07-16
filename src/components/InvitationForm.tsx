@@ -75,16 +75,26 @@ export default function InvitationForm({ tenantId, invitation }: { tenantId: str
         <label className="block text-[11px] font-medium text-navy-400/60 mb-1.5">Theme</label>
         <div className="grid grid-cols-5 gap-2">
           {[
-            { id: 'romantic', name: 'Romantic', bg: 'bg-rose-100 border border-rose-200' },
-            { id: 'modern', name: 'Dark', bg: 'bg-slate-800 border border-slate-700' },
+            { id: 'romantic', name: 'Romantic', bg: 'bg-rose-100' },
+            { id: 'modern', name: 'Dark', bg: 'bg-slate-800' },
             { id: 'royal', name: 'Royal', bg: 'bg-rose-gold-100/50 border border-rose-gold-200' },
             { id: 'vintage', name: 'Vintage', bg: 'bg-emerald-50 border border-emerald-200' },
+            { id: 'luxe', name: 'Luxe', bg: 'bg-white border border-gray-900' },
+            { id: 'boho', name: 'Boho', bg: 'bg-orange-100' },
+            { id: 'midnight', name: 'Midnight', bg: 'bg-indigo-950' },
+            { id: 'script', name: 'Script', bg: 'bg-rose-gold-50/30 border-t-4 border-indigo-400' },
+            { id: 'floral', name: 'Floral', bg: 'bg-rose-50 border border-rose-200', icon: '✿' },
             { id: 'sakura', name: 'Sakura', bg: 'bg-pink-50 border border-pink-200', icon: '🌸' },
             { id: 'tropical', name: 'Tropical', bg: 'bg-emerald-50 border border-emerald-200', icon: '🌺' },
             { id: 'elegant', name: 'Elegant', bg: 'bg-red-50 border border-red-200', icon: '🌹' },
             { id: 'lavender', name: 'Lavender', bg: 'bg-purple-50 border border-purple-200', icon: '🪻' },
             { id: 'sunflower', name: 'Sunflower', bg: 'bg-rose-gold-300 border border-rose-gold-400', icon: '🌻' },
             { id: 'lily', name: 'Lily', bg: 'bg-rose-gold-50/30 border border-rose-gold-100/50', icon: '🫶' },
+            { id: 'wildflower', name: 'Wildflower', bg: 'bg-emerald-50 border border-emerald-200', icon: '💐' },
+            { id: 'orchid', name: 'Orchid', bg: 'bg-pink-100 border border-pink-300', icon: '💮' },
+            { id: 'autumn', name: 'Autumn', bg: 'bg-orange-100 border border-orange-300', icon: '🍂' },
+            { id: 'hydrangea', name: 'Hydrangea', bg: 'bg-blue-50 border border-blue-200', icon: '💠' },
+            { id: 'peony', name: 'Peony', bg: 'bg-rose-50 border border-rose-200', icon: '❦' },
           ].map(t => (
             <label key={t.id} className="flex flex-col items-center p-1.5 border-2 rounded-xl cursor-pointer transition-all has-[:checked]:border-rose-gold-400 has-[:checked]:bg-rose-gold-50 border-rose-gold-100/30 hover:border-rose-gold-200 bg-white shadow-sm">
               <input type="radio" name="theme" value={t.id} defaultChecked={invitation?.theme === t.id || (!invitation?.theme && t.id === 'romantic')} className="absolute opacity-0" />
