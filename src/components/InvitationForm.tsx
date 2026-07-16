@@ -73,7 +73,7 @@ export default function InvitationForm({ tenantId, invitation }: { tenantId: str
 
       <div>
         <label className="block text-[11px] font-medium text-navy-400/60 mb-1.5">Theme</label>
-        <select name="theme" defaultValue="romantic" className="w-full h-10 px-3 rounded-xl border border-navy-200/20 text-sm text-navy-700 font-medium bg-white focus:outline-none focus:ring-2 focus:ring-rose-gold-400/40 transition-all">
+        <select name="theme" defaultValue={invitation?.theme || "romantic"} className="w-full h-10 px-3 rounded-xl border border-navy-200/20 text-sm text-navy-700 font-medium bg-white focus:outline-none focus:ring-2 focus:ring-rose-gold-400/40 transition-all">
           <option value="romantic">Romantic</option>
           <option value="elegant">Elegant Rose</option>
           <option value="modern">Modern Dark</option>
