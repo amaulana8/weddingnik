@@ -12,231 +12,51 @@ interface Props {
   tenantId: string
 }
 
-const themeConfig: Record<string, { bg: string; font: string; accent: string; headerStyle: string; cardBg: string; isDark: boolean }> = {
-  romantic: {
-    bg: 'from-rose-100 via-white to-rose-50',
-    font: "'Playfair Display', serif",
-    accent: 'rose',
-    headerStyle: 'text-rose-700',
-    cardBg: 'bg-white/70 backdrop-blur-md',
-    isDark: false,
-  },
-  modern: {
-    bg: 'from-slate-900 via-slate-800 to-slate-900',
-    font: "'Montserrat', sans-serif",
-    accent: 'indigo',
-    headerStyle: 'text-indigo-300',
-    cardBg: 'bg-white/10 backdrop-blur-md',
-    isDark: true,
-  },
-  royal: {
-    bg: 'from-amber-50 via-white to-amber-50',
-    font: "'Crimson Text', serif",
-    accent: 'amber',
-    headerStyle: 'text-amber-700',
-    cardBg: 'bg-white/70 backdrop-blur-md',
-    isDark: false,
-  },
-  vintage: {
-    bg: 'from-emerald-50 via-stone-50 to-emerald-50',
-    font: "'Crimson Text', serif",
-    accent: 'emerald',
-    headerStyle: 'text-emerald-700',
-    cardBg: 'bg-white/60 backdrop-blur-md',
-    isDark: false,
-  },
-  elegant: {
-    bg: 'from-red-50 via-white to-red-50',
-    font: "'Playfair Display', serif",
-    accent: 'red',
-    headerStyle: 'text-red-700',
-    cardBg: 'bg-white/70 backdrop-blur-md',
-    isDark: false,
-  },
-  sakura: {
-    bg: 'from-pink-100 via-white to-pink-50',
-    font: "'Great Vibes', cursive",
-    accent: 'pink',
-    headerStyle: 'text-pink-600',
-    cardBg: 'bg-white/70 backdrop-blur-md',
-    isDark: false,
-  },
-  lavender: {
-    bg: 'from-purple-100 via-white to-purple-50',
-    font: "'Playfair Display', serif",
-    accent: 'purple',
-    headerStyle: 'text-purple-700',
-    cardBg: 'bg-white/70 backdrop-blur-md',
-    isDark: false,
-  },
-  sunflower: {
-    bg: 'from-amber-100 via-white to-yellow-50',
-    font: "'Playfair Display', serif",
-    accent: 'amber',
-    headerStyle: 'text-amber-700',
-    cardBg: 'bg-white/70 backdrop-blur-md',
-    isDark: false,
-  },
-  tropical: {
-    bg: 'from-emerald-100 via-white to-teal-50',
-    font: "'Montserrat', sans-serif",
-    accent: 'emerald',
-    headerStyle: 'text-emerald-600',
-    cardBg: 'bg-white/70 backdrop-blur-md',
-    isDark: false,
-  },
-  midnight: {
-    bg: 'from-indigo-950 via-indigo-900 to-indigo-950',
-    font: "'Crimson Text', serif",
-    accent: 'indigo',
-    headerStyle: 'text-indigo-300',
-    cardBg: 'bg-white/10 backdrop-blur-md',
-    isDark: true,
-  },
-  lily: {
-    bg: 'from-rose-gold-50 via-white to-rose-gold-50/30',
-    font: "'Playfair Display', serif",
-    accent: 'rose-gold',
-    headerStyle: 'text-rose-gold-600',
-    cardBg: 'bg-white/70 backdrop-blur-md',
-    isDark: false,
-  },
+const themeConfig: Record<string, any> = {
+  romantic: { bg: 'from-rose-100 via-white to-rose-50', font: "'Playfair Display', serif", accent: 'rose', isDark: false, rounding: '3xl', cardPad: 'p-6', spacing: 'mt-10', headSize: 'text-3xl', btnShape: 'rounded-full' },
+  modern: { bg: 'from-slate-900 via-slate-800 to-slate-900', font: "'Montserrat', sans-serif", accent: 'indigo', isDark: true, rounding: 'lg', cardPad: 'p-4', spacing: 'mt-6', headSize: 'text-2xl font-light tracking-wide', btnShape: 'rounded-lg' },
+  royal: { bg: 'from-amber-50 via-white to-amber-50', font: "'Crimson Text', serif", accent: 'amber', isDark: false, rounding: '2xl', cardPad: 'p-8', spacing: 'mt-12', headSize: 'text-4xl uppercase tracking-widest', btnShape: 'rounded-2xl' },
+  vintage: { bg: 'from-emerald-50 via-stone-50 to-emerald-50', font: "'Crimson Text', serif", accent: 'emerald', isDark: false, rounding: 'xl', cardPad: 'p-5', spacing: 'mt-8', headSize: 'text-2xl', btnShape: 'rounded-xl border-2' },
+  luxe: { bg: 'from-stone-100 via-white to-stone-50', font: "'Playfair Display', serif", accent: 'rose-gold', isDark: false, rounding: 'full', cardPad: 'p-8', spacing: 'mt-14', headSize: 'text-3xl tracking-[0.1em]', btnShape: 'rounded-full border border-navy-100/20' },
+  boho: { bg: 'from-orange-50 via-white to-amber-50', font: "'Crimson Text', serif", accent: 'orange', isDark: false, rounding: 'xl', cardPad: 'p-5', spacing: 'mt-8', headSize: 'text-2xl', btnShape: 'rounded-xl' },
+  midnight: { bg: 'from-indigo-950 via-indigo-900 to-indigo-950', font: "'Crimson Text', serif", accent: 'indigo', isDark: true, rounding: '2xl', cardPad: 'p-6', spacing: 'mt-10', headSize: 'text-3xl tracking-wide', btnShape: 'rounded-2xl' },
+  script: { bg: 'from-rose-gold-50 via-white to-rose-gold-50/30', font: "'Great Vibes', cursive", accent: 'rose-gold', isDark: false, rounding: '2xl', cardPad: 'p-6', spacing: 'mt-10', headSize: 'text-4xl', btnShape: 'rounded-2xl' },
+  floral: { bg: 'from-rose-50 via-white to-pink-50', font: "'Playfair Display', serif", accent: 'pink', isDark: false, rounding: 'xl', cardPad: 'p-5', spacing: 'mt-8', headSize: 'text-2xl italic', btnShape: 'rounded-xl' },
+  sakura: { bg: 'from-pink-50 via-white to-pink-50/30', font: "'Great Vibes', cursive", accent: 'pink', isDark: false, rounding: '2xl', cardPad: 'p-6', spacing: 'mt-8', headSize: 'text-3xl', btnShape: 'rounded-2xl' },
+  tropical: { bg: 'from-emerald-50 via-white to-teal-50', font: "'Montserrat', sans-serif", accent: 'emerald', isDark: false, rounding: 'xl', cardPad: 'p-5', spacing: 'mt-8', headSize: 'text-2xl font-light', btnShape: 'rounded-xl' },
+  elegant: { bg: 'from-red-50 via-white to-rose-50', font: "'Playfair Display', serif", accent: 'red', isDark: false, rounding: 'full', cardPad: 'p-8', spacing: 'mt-12', headSize: 'text-3xl', btnShape: 'rounded-full' },
+  lavender: { bg: 'from-purple-50 via-white to-purple-50/30', font: "'Playfair Display', serif", accent: 'purple', isDark: false, rounding: '2xl', cardPad: 'p-6', spacing: 'mt-10', headSize: 'text-2xl', btnShape: 'rounded-2xl' },
+  sunflower: { bg: 'from-amber-50 via-white to-yellow-50', font: "'Montserrat', sans-serif", accent: 'amber', isDark: false, rounding: 'xl', cardPad: 'p-5', spacing: 'mt-8', headSize: 'text-2xl font-bold', btnShape: 'rounded-xl' },
+  lily: { bg: 'from-rose-gold-50 via-white to-rose-gold-50/30', font: "'Playfair Display', serif", accent: 'rose-gold', isDark: false, rounding: '3xl', cardPad: 'p-6', spacing: 'mt-10', headSize: 'text-3xl', btnShape: 'rounded-3xl' },
+  wildflower: { bg: 'from-emerald-50 via-white to-amber-50', font: "'Montserrat', sans-serif", accent: 'emerald', isDark: false, rounding: 'xl', cardPad: 'p-5', spacing: 'mt-8', headSize: 'text-xl font-bold', btnShape: 'rounded-xl' },
+  orchid: { bg: 'from-pink-50 via-white to-purple-50', font: "'Playfair Display', serif", accent: 'pink', isDark: false, rounding: '3xl', cardPad: 'p-7', spacing: 'mt-10', headSize: 'text-2xl italic', btnShape: 'rounded-3xl' },
+  autumn: { bg: 'from-orange-50 via-amber-50 to-orange-50', font: "'Crimson Text', serif", accent: 'orange', isDark: false, rounding: 'xl', cardPad: 'p-5', spacing: 'mt-8', headSize: 'text-2xl', btnShape: 'rounded-xl' },
+  hydrangea: { bg: 'from-blue-50 via-white to-indigo-50', font: "'Playfair Display', serif", accent: 'blue', isDark: false, rounding: '2xl', cardPad: 'p-6', spacing: 'mt-10', headSize: 'text-2xl', btnShape: 'rounded-2xl' },
+  peony: { bg: 'from-rose-50 via-white to-pink-50', font: "'Playfair Display', serif", accent: 'rose', isDark: false, rounding: 'full', cardPad: 'p-7', spacing: 'mt-10', headSize: 'text-3xl', btnShape: 'rounded-full' },
 }
 
-
+// @tailwind-safelist: rounded-3xl rounded-lg rounded-2xl rounded-xl rounded-full p-4 p-5 p-6 p-7 p-8 mt-6 mt-8 mt-10 mt-12 mt-14 text-2xl text-3xl text-4xl font-light font-bold font-black tracking-wide tracking-wider tracking-[0.1em] uppercase italic leading-tight leading-relaxed border-2 rounded-full border border-navy-100/20 text-xl
 const petalMap: Record<string, Array<{icon: string; left: string; duration: string; delay: string}>> = {
-  romantic: [
-    {icon: '💖', left: '10%', duration: '8s', delay: '0s'},
-    {icon: '✨', left: '30%', duration: '12s', delay: '2s'},
-    {icon: '💖', left: '50%', duration: '10s', delay: '1s'},
-    {icon: '✨', left: '75%', duration: '14s', delay: '4s'},
-    {icon: '💖', left: '90%', duration: '9s', delay: '0s'},
-  ],
-  modern: [
-    {icon: '✧', left: '15%', duration: '10s', delay: '0s'},
-    {icon: '✦', left: '35%', duration: '13s', delay: '2s'},
-    {icon: '✧', left: '55%', duration: '9s', delay: '1s'},
-    {icon: '✦', left: '75%', duration: '14s', delay: '3s'},
-    {icon: '✧', left: '90%', duration: '11s', delay: '0s'},
-  ],
-  royal: [
-    {icon: '☦', left: '10%', duration: '9s', delay: '0s'},
-    {icon: '✨', left: '30%', duration: '12s', delay: '3s'},
-    {icon: '☦', left: '50%', duration: '10s', delay: '1s'},
-    {icon: '✨', left: '70%', duration: '14s', delay: '4s'},
-    {icon: '☦', left: '85%', duration: '11s', delay: '0s'},
-  ],
-  vintage: [
-    {icon: '🍂', left: '15%', duration: '8s', delay: '0s'},
-    {icon: '🍃', left: '40%', duration: '11s', delay: '2s'},
-    {icon: '🍂', left: '60%', duration: '9s', delay: '1s'},
-    {icon: '🍃', left: '85%', duration: '13s', delay: '3s'},
-  ],
-  luxe: [
-    {icon: '✨', left: '10%', duration: '10s', delay: '0s'},
-    {icon: '💎', left: '30%', duration: '13s', delay: '2s'},
-    {icon: '✨', left: '50%', duration: '9s', delay: '1s'},
-    {icon: '✨', left: '75%', duration: '14s', delay: '4s'},
-    {icon: '💎', left: '90%', duration: '11s', delay: '0s'},
-  ],
-  boho: [
-    {icon: '🌾', left: '10%', duration: '8s', delay: '0s'},
-    {icon: '🍂', left: '35%', duration: '12s', delay: '2s'},
-    {icon: '🌾', left: '55%', duration: '9s', delay: '1s'},
-    {icon: '🍂', left: '75%', duration: '13s', delay: '3s'},
-    {icon: '🌾', left: '90%', duration: '10s', delay: '0s'},
-  ],
-  midnight: [
-    {icon: '🌙', left: '10%', duration: '10s', delay: '0s'},
-    {icon: '✨', left: '30%', duration: '13s', delay: '2s'},
-    {icon: '⭐', left: '50%', duration: '9s', delay: '1s'},
-    {icon: '✨', left: '70%', duration: '14s', delay: '3s'},
-    {icon: '🌙', left: '85%', duration: '11s', delay: '0s'},
-  ],
-  tropical: [
-    {icon: '🍃', left: '10%', duration: '8s', delay: '0s'},
-    {icon: '🌺', left: '30%', duration: '11s', delay: '2s'},
-    {icon: '🍃', left: '50%', duration: '9s', delay: '1s'},
-    {icon: '🌺', left: '75%', duration: '13s', delay: '3s'},
-    {icon: '🍃', left: '90%', duration: '10s', delay: '0s'},
-  ],
-  elegant: [
-    {icon: '🌹', left: '10%', duration: '9s', delay: '0s'},
-    {icon: '✨', left: '35%', duration: '12s', delay: '2s'},
-    {icon: '🌹', left: '55%', duration: '10s', delay: '1s'},
-    {icon: '✨', left: '75%', duration: '14s', delay: '3s'},
-    {icon: '🌹', left: '90%', duration: '11s', delay: '0s'},
-  ],
-  sakura: [
-    {icon: '🌸', left: '10%', duration: '8s', delay: '0s'},
-    {icon: '🌸', left: '30%', duration: '12s', delay: '2s'},
-    {icon: '🌸', left: '50%', duration: '10s', delay: '1s'},
-    {icon: '🌸', left: '75%', duration: '14s', delay: '4s'},
-    {icon: '🌸', left: '90%', duration: '9s', delay: '0s'},
-  ],
-  lavender: [
-    {icon: '🪻', left: '10%', duration: '9s', delay: '0s'},
-    {icon: '✨', left: '30%', duration: '12s', delay: '2s'},
-    {icon: '🪻', left: '50%', duration: '10s', delay: '1s'},
-    {icon: '✨', left: '70%', duration: '14s', delay: '3s'},
-    {icon: '🪻', left: '85%', duration: '11s', delay: '0s'},
-  ],
-  sunflower: [
-    {icon: '🌻', left: '10%', duration: '8s', delay: '0s'},
-    {icon: '✨', left: '30%', duration: '12s', delay: '2s'},
-    {icon: '🌻', left: '50%', duration: '10s', delay: '1s'},
-    {icon: '✨', left: '70%', duration: '14s', delay: '3s'},
-    {icon: '🌻', left: '85%', duration: '9s', delay: '0s'},
-  ],
-  lily: [
-    {icon: '🫶', left: '15%', duration: '9s', delay: '0s'},
-    {icon: '✨', left: '35%', duration: '12s', delay: '2s'},
-    {icon: '🫶', left: '50%', duration: '10s', delay: '1s'},
-    {icon: '✨', left: '75%', duration: '14s', delay: '3s'},
-    {icon: '🫶', left: '85%', duration: '11s', delay: '0s'},
-  ],
-  floral: [
-    {icon: '✿', left: '10%', duration: '8s', delay: '0s'},
-    {icon: '🌸', left: '30%', duration: '11s', delay: '2s'},
-    {icon: '✿', left: '55%', duration: '9s', delay: '1s'},
-    {icon: '🌸', left: '75%', duration: '13s', delay: '3s'},
-    {icon: '✿', left: '90%', duration: '10s', delay: '0s'},
-  ],
-  wildflower: [
-    {icon: '💐', left: '10%', duration: '9s', delay: '0s'},
-    {icon: '🌸', left: '35%', duration: '12s', delay: '2s'},
-    {icon: '💐', left: '55%', duration: '10s', delay: '1s'},
-    {icon: '🌸', left: '75%', duration: '13s', delay: '3s'},
-    {icon: '💐', left: '90%', duration: '11s', delay: '0s'},
-  ],
-  orchid: [
-    {icon: '💮', left: '10%', duration: '8s', delay: '0s'},
-    {icon: '🌸', left: '30%', duration: '11s', delay: '2s'},
-    {icon: '💮', left: '50%', duration: '9s', delay: '1s'},
-    {icon: '🌸', left: '75%', duration: '14s', delay: '3s'},
-    {icon: '💮', left: '90%', duration: '10s', delay: '0s'},
-  ],
-  autumn: [
-    {icon: '🍂', left: '10%', duration: '8s', delay: '0s'},
-    {icon: '🍁', left: '30%', duration: '12s', delay: '2s'},
-    {icon: '🍂', left: '50%', duration: '9s', delay: '1s'},
-    {icon: '🍁', left: '75%', duration: '14s', delay: '3s'},
-    {icon: '🍂', left: '90%', duration: '10s', delay: '0s'},
-  ],
-  hydrangea: [
-    {icon: '💠', left: '10%', duration: '9s', delay: '0s'},
-    {icon: '🌸', left: '35%', duration: '12s', delay: '2s'},
-    {icon: '💠', left: '55%', duration: '10s', delay: '1s'},
-    {icon: '🌸', left: '75%', duration: '14s', delay: '3s'},
-    {icon: '💠', left: '90%', duration: '11s', delay: '0s'},
-  ],
-  peony: [
-    {icon: '❦', left: '10%', duration: '8s', delay: '0s'},
-    {icon: '✨', left: '30%', duration: '12s', delay: '2s'},
-    {icon: '❦', left: '50%', duration: '10s', delay: '1s'},
-    {icon: '✨', left: '75%', duration: '14s', delay: '4s'},
-    {icon: '❦', left: '90%', duration: '9s', delay: '0s'},
-  ],
+  romantic: [{icon:'💖',left:'10%',duration:'8s',delay:'0s'},{icon:'✨',left:'30%',duration:'12s',delay:'2s'},{icon:'💖',left:'50%',duration:'10s',delay:'1s'},{icon:'✨',left:'75%',duration:'14s',delay:'4s'},{icon:'💖',left:'90%',duration:'9s',delay:'0s'}],
+  modern: [{icon:'✧',left:'15%',duration:'10s',delay:'0s'},{icon:'✦',left:'35%',duration:'13s',delay:'2s'},{icon:'✧',left:'55%',duration:'9s',delay:'1s'},{icon:'✦',left:'75%',duration:'14s',delay:'3s'},{icon:'✧',left:'90%',duration:'11s',delay:'0s'}],
+  royal: [{icon:'☦',left:'10%',duration:'9s',delay:'0s'},{icon:'✨',left:'30%',duration:'12s',delay:'3s'},{icon:'☦',left:'50%',duration:'10s',delay:'1s'},{icon:'✨',left:'70%',duration:'14s',delay:'4s'},{icon:'☦',left:'85%',duration:'11s',delay:'0s'}],
+  vintage: [{icon:'🍂',left:'15%',duration:'8s',delay:'0s'},{icon:'🍃',left:'40%',duration:'11s',delay:'2s'},{icon:'🍂',left:'60%',duration:'9s',delay:'1s'},{icon:'🍃',left:'85%',duration:'13s',delay:'3s'}],
+  luxe: [{icon:'✨',left:'10%',duration:'10s',delay:'0s'},{icon:'💎',left:'30%',duration:'13s',delay:'2s'},{icon:'✨',left:'50%',duration:'9s',delay:'1s'},{icon:'✨',left:'75%',duration:'14s',delay:'4s'},{icon:'💎',left:'90%',duration:'11s',delay:'0s'}],
+  boho: [{icon:'🌾',left:'10%',duration:'8s',delay:'0s'},{icon:'🍂',left:'35%',duration:'12s',delay:'2s'},{icon:'🌾',left:'55%',duration:'9s',delay:'1s'},{icon:'🍂',left:'75%',duration:'13s',delay:'3s'},{icon:'🌾',left:'90%',duration:'10s',delay:'0s'}],
+  midnight: [{icon:'🌙',left:'10%',duration:'10s',delay:'0s'},{icon:'✨',left:'30%',duration:'13s',delay:'2s'},{icon:'⭐',left:'50%',duration:'9s',delay:'1s'},{icon:'✨',left:'70%',duration:'14s',delay:'3s'},{icon:'🌙',left:'85%',duration:'11s',delay:'0s'}],
+  tropical: [{icon:'🍃',left:'10%',duration:'8s',delay:'0s'},{icon:'🌺',left:'30%',duration:'11s',delay:'2s'},{icon:'🍃',left:'50%',duration:'9s',delay:'1s'},{icon:'🌺',left:'75%',duration:'13s',delay:'3s'},{icon:'🍃',left:'90%',duration:'10s',delay:'0s'}],
+  elegant: [{icon:'🌹',left:'10%',duration:'9s',delay:'0s'},{icon:'✨',left:'35%',duration:'12s',delay:'2s'},{icon:'🌹',left:'55%',duration:'10s',delay:'1s'},{icon:'✨',left:'75%',duration:'14s',delay:'3s'},{icon:'🌹',left:'90%',duration:'11s',delay:'0s'}],
+  sakura: [{icon:'🌸',left:'10%',duration:'8s',delay:'0s'},{icon:'🌸',left:'30%',duration:'12s',delay:'2s'},{icon:'🌸',left:'50%',duration:'10s',delay:'1s'},{icon:'🌸',left:'75%',duration:'14s',delay:'4s'},{icon:'🌸',left:'90%',duration:'9s',delay:'0s'}],
+  lavender: [{icon:'🪻',left:'10%',duration:'9s',delay:'0s'},{icon:'✨',left:'30%',duration:'12s',delay:'2s'},{icon:'🪻',left:'50%',duration:'10s',delay:'1s'},{icon:'✨',left:'70%',duration:'14s',delay:'3s'},{icon:'🪻',left:'85%',duration:'11s',delay:'0s'}],
+  sunflower: [{icon:'🌻',left:'10%',duration:'8s',delay:'0s'},{icon:'✨',left:'30%',duration:'12s',delay:'2s'},{icon:'🌻',left:'50%',duration:'10s',delay:'1s'},{icon:'✨',left:'70%',duration:'14s',delay:'3s'},{icon:'🌻',left:'85%',duration:'9s',delay:'0s'}],
+  lily: [{icon:'🫶',left:'15%',duration:'9s',delay:'0s'},{icon:'✨',left:'35%',duration:'12s',delay:'2s'},{icon:'🫶',left:'50%',duration:'10s',delay:'1s'},{icon:'✨',left:'75%',duration:'14s',delay:'3s'},{icon:'🫶',left:'85%',duration:'11s',delay:'0s'}],
+  floral: [{icon:'✿',left:'10%',duration:'8s',delay:'0s'},{icon:'🌸',left:'30%',duration:'11s',delay:'2s'},{icon:'✿',left:'55%',duration:'9s',delay:'1s'},{icon:'🌸',left:'75%',duration:'13s',delay:'3s'},{icon:'✿',left:'90%',duration:'10s',delay:'0s'}],
+  wildflower: [{icon:'💐',left:'10%',duration:'9s',delay:'0s'},{icon:'🌸',left:'35%',duration:'12s',delay:'2s'},{icon:'💐',left:'55%',duration:'10s',delay:'1s'},{icon:'🌸',left:'75%',duration:'13s',delay:'3s'},{icon:'💐',left:'90%',duration:'11s',delay:'0s'}],
+  orchid: [{icon:'💮',left:'10%',duration:'8s',delay:'0s'},{icon:'🌸',left:'30%',duration:'11s',delay:'2s'},{icon:'💮',left:'50%',duration:'9s',delay:'1s'},{icon:'🌸',left:'75%',duration:'14s',delay:'3s'},{icon:'💮',left:'90%',duration:'10s',delay:'0s'}],
+  autumn: [{icon:'🍂',left:'10%',duration:'8s',delay:'0s'},{icon:'🍁',left:'30%',duration:'12s',delay:'2s'},{icon:'🍂',left:'50%',duration:'9s',delay:'1s'},{icon:'🍁',left:'75%',duration:'14s',delay:'3s'},{icon:'🍂',left:'90%',duration:'10s',delay:'0s'}],
+  hydrangea: [{icon:'💠',left:'10%',duration:'9s',delay:'0s'},{icon:'🌸',left:'35%',duration:'12s',delay:'2s'},{icon:'💠',left:'55%',duration:'10s',delay:'1s'},{icon:'🌸',left:'75%',duration:'14s',delay:'3s'},{icon:'💠',left:'90%',duration:'11s',delay:'0s'}],
+  peony: [{icon:'❦',left:'10%',duration:'8s',delay:'0s'},{icon:'✨',left:'30%',duration:'12s',delay:'2s'},{icon:'❦',left:'50%',duration:'10s',delay:'1s'},{icon:'✨',left:'75%',duration:'14s',delay:'4s'},{icon:'❦',left:'90%',duration:'9s',delay:'0s'}],
+  script: [{icon:'🫶',left:'15%',duration:'9s',delay:'0s'},{icon:'✨',left:'35%',duration:'12s',delay:'2s'},{icon:'🫶',left:'60%',duration:'10s',delay:'1s'},{icon:'✨',left:'80%',duration:'14s',delay:'3s'}],
 }
 
 export default function InvitationClient({ invitation, guestInfo, tenantId }: Props) {
@@ -304,7 +124,7 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
           {/* Header */}
           <div className="text-center mt-16">
             <p className={`text-[10px] uppercase tracking-[0.4em] font-black mb-6 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/50' : 'text-rose-400'}`}>The Wedding of</p>
-            <h1 className={`text-3xl sm:text-4xl font-bold mb-2 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>
+            <h1 className={`${theme.headSize} font-bold mb-2 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>
               {coupleName}
             <p style={{fontSize:8,marginTop:4,opacity:0.3}}>Theme: {themeId}</p>
             </h1>
@@ -322,7 +142,7 @@ export default function InvitationClient({ invitation, guestInfo, tenantId }: Pr
             <div className={`mt-10 ${themeId === 'modern' || themeId === 'midnight' ? 'bg-white/10 backdrop-blur-md' : 'bg-white/70 backdrop-blur-md' } rounded-3xl p-6 border ${themeId === 'modern' || themeId === 'midnight'  ? 'border-white/10' : 'border-white/50'} shadow-xl text-center`}>
               <div className="text-3xl mb-3">📅</div>
               <p className={`text-[10px] uppercase tracking-[0.3em] font-black mb-2 ${accent.split(' ')[0]}`}>Date & Time</p>
-              <p className={`text-lg font-bold ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white' : 'text-slate-900'}`} style={{ fontFamily: theme.font }}>{formatDate(invitation.event_date)}</p>
+              <p className={`${themeId === 'modern' || themeId === 'midnight'  ? 'text-white' : 'text-slate-900'} ${theme.font === "'Montserrat', sans-serif" ? 'text-base font-light' : 'text-lg font-bold'}`} style={{ fontFamily: theme.font }}>{formatDate(invitation.event_date)}</p>
               <p className={`text-sm font-medium mt-1 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/60' : 'text-slate-500'}`}>{formatTime(invitation.event_date)}</p>
               {invitation.location && <p className={`text-xs mt-3 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/50' : 'text-slate-500'}`}>{invitation.location}</p>}
               {invitation.venue_address && <p className={`text-[10px] mt-1 ${themeId === 'modern' || themeId === 'midnight'  ? 'text-white/40' : 'text-slate-400'}`}>{invitation.venue_address}</p>}
